@@ -23,6 +23,10 @@ const userSchema = new Schema(
       type: String,
     },
 
+    userDescription:{
+      type:String,
+    },
+
     twitter: {
       type: String,
     },
@@ -59,25 +63,11 @@ const userSchema = new Schema(
         ref: "Event",
       },
     ],
-
-    eventsJoinedId: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Event",
-      },
-    ],
-
-    groupsCreatedId: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Group",
-      },
-    ],
-
+    
     groupsJoinedId: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Groups",
+        ref: "Group",
       },
     ],
   },

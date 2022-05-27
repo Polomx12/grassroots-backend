@@ -12,7 +12,6 @@ router.post(
   "/create",
   fileUploader.single("event-cover-image"),
   (req, res, next) => {
-    console.log(req.body);
     Group.create(req.body)
       .then((group) => {
         res.json(group);

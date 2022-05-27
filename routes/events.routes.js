@@ -10,7 +10,6 @@ const { compareSync } = require("bcrypt");
 //TODO: Change cloudinary config
 //Create Events
 router.post("/create", fileUploader.single("eventImage"), (req, res, next) => {
-  console.log(req.body)
   Event.create(req.body)
     .then((event) => {
       res.json(event);

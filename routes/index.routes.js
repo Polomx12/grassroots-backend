@@ -10,12 +10,12 @@ const groupsRoutes = require("./groups.routes");
 const postsRoutes = require("./posts.routes");
 
 //MondoDB imports
-const Event = require("../models/event.model");
+const Group = require("../models/group.model");
 const User = require("../models/user.model");
 
 //Home routes
 router.get("/home", (req, res, next) => {
-  Event.find()
+  Group.find()
     .sort({ likes: -1 })
     .limit(3)
     .then((events) => {
@@ -26,6 +26,16 @@ router.get("/home", (req, res, next) => {
 
 router.get("/learn", (req, res, next) => {
   res.json("You have accessed the learn page");
+});
+
+router.post("/addgroup", (req, res, next) => {
+  User.findById(req.body.user)
+    .populate("groupsJoinedId")
+    .then((user) => {
+      user.groupsJoinedId.push(req.body.group);
+      user.save()
+      res.json(user)
+    });
 });
 
 //Manages the routes to other pages

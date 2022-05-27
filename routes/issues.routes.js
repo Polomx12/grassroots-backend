@@ -11,9 +11,7 @@ router.post("/create", fileUploader.single("placeholder"), (req, res, next) => {
     .then((issue) => {
       res.json(issue);
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch(console.log);
 });
 
 //Read Issues
