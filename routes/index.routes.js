@@ -12,6 +12,7 @@ const postsRoutes = require("./posts.routes");
 //MondoDB imports
 const Group = require("../models/group.model");
 const User = require("../models/user.model");
+const Post = require("../models/post.model");
 
 //Home routes
 router.get("/home", (req, res, next) => {
@@ -24,18 +25,33 @@ router.get("/home", (req, res, next) => {
     .catch(console.log);
 });
 
-router.get("/learn", (req, res, next) => {
-  res.json("You have accessed the learn page");
-});
-
 router.post("/addgroup", (req, res, next) => {
-  User.findById(req.body.user)
+  User.findById("628f088bc9086d416afbc97f")
     .populate("groupsJoinedId")
     .then((user) => {
       user.groupsJoinedId.push(req.body.group);
-      user.save()
-      res.json(user)
+      user.save();
+      res.json(user);
     });
+});
+
+router.post("/group/:group/comments", (req, res, next) => {
+  console.log(req.body)
+  Post.create(req.body)
+    .then((comment) => {
+      let typo = 0;
+      typo = comment._id;   
+
+      Group.findById(req.body.groupId)
+        .then((group) => {
+          group.posts.push(typo);
+          group.save();
+        })
+        .catch(console.log);
+
+      res.json("success");
+    })
+    .catch(console.log);
 });
 
 //Manages the routes to other pages

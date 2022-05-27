@@ -33,6 +33,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/group/:groupId", (req, res, next) => {
   Group.findById(req.params.groupId)
+    .populate("posts")
     .then((group) => {
       res.json(group);
     })
@@ -42,6 +43,7 @@ router.get("/group/:groupId", (req, res, next) => {
 //Update events
 router.post("/group/:groupId/edit", (req, res, next) => {
   Group.findByIdAndUpdate(req.params.groupId, req.body, { new: true })
+    .populate("posts")
     .then((group) => {
       res.json(group);
     })

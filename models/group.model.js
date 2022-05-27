@@ -49,6 +49,7 @@ const GroupSchema = new Schema({
 
   groupImage: {
     type: String,
+    default:"https://res.cloudinary.com/polomx12/image/upload/v1653650858/Grassroots/860x394-1-5_atzspc.jpg"
   },
 
   webPage: {

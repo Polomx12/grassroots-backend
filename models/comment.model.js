@@ -12,13 +12,6 @@ const commentSchema = new Schema(
       ref: "Post",
     },
 
-    subComments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
-      },
-    ],
-
     likes: {
       type: Number,
     },

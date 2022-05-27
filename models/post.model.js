@@ -7,6 +7,10 @@ const postSchema = new Schema(
       ref: "User",
     },
 
+    userName:{
+      type:String,
+    },
+
     comments: [
       {
         type: Schema.Types.ObjectId,
