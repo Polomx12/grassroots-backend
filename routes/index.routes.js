@@ -11,7 +11,7 @@ const postsRoutes = require("./posts.routes");
 
 //MondoDB imports
 const Event = require("../models/event.model");
-const User = require("../models/User.model");
+const User = require("../models/user.model");
 
 //Home routes
 router.get("/home", (req, res, next) => {
