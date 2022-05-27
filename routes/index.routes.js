@@ -10,12 +10,11 @@ const groupsRoutes = require("./groups.routes");
 const postsRoutes = require("./posts.routes");
 
 //MondoDB imports
-const Event = require("../models/Event.model");
+const Event = require("../models/event.model");
 const User = require("../models/User.model");
 
 //Home routes
 router.get("/home", (req, res, next) => {
-  
   Event.find()
     .sort({ likes: -1 })
     .limit(3)
