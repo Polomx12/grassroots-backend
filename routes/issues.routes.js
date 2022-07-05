@@ -1,50 +1,66 @@
 //Imports
 const router = require("express").Router();
-const fileUploader = require("../config/cloudinary.config");
 
 //Import models
 const Issues = require("../models/issue.model");
 
-//Create Issues
-router.post("/create", fileUploader.single("placeholder"), (req, res, next) => {
+//Create an Issue
+router.post("/", (req, res) => {
   Issues.create(req.body)
     .then((issue) => {
       res.json(issue);
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
-//Read Issues
-router.get("/", (req, res, next) => {
+//Read all Issues
+router.get("/", (req, res) => {
   Issues.find()
     .then((issues) => {
       res.json(issues);
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
-router.get("/issue/:issueId", (req, res, next) => {
+//Read an Issue
+router.get("/:issueId", (req, res) => {
   Issues.findById(req.params.issueId)
-    .then((event) => {
-      res.json(event);
+    .then((issue) => {
+      res.json(issue);
     })
-    .catch(console.log);
+    .catch((err) => {
+      res.json({ message: "Internal Server Error" });
+      console.log(err);
+    });
 });
 
-//Update events
-router.post("/issue/:issueId/edit", (req, res, next) => {
+//Updates an Issue
+router.patch("/:issueId", (req, res) => {
   Issues.findByIdAndUpdate(req.params.issueId, req.body, { new: true })
     .then((issue) => {
       res.json(issue);
     })
-    .catch(console.log);
+    .catch((err) => {
+      res.json({ message: "Internal Server Error" });
+      console.log(err);
+    });
 });
 
-//Delete events
-router.post("/issue/:issueId/delete", (req, res, next) => {
+//Deletes an issue
+router.delete("/:issueId", (req, res) => {
   Issues.findByIdAndDelete(req.params.issueId)
-    .then(res.json("success"))
-    .catch(console.log);
+    .then((issue) => {
+      res.json(issue);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 module.exports = router;

@@ -3,61 +3,21 @@ const router = require("express").Router();
 
 //Routes Imports
 const authRoutes = require("./auth.routes");
-const userRoutes = require("./user.routes");
+const usersRoutes = require("./user.routes");
 const issuesRoutes = require("./issues.routes");
 const eventsRoutes = require("./events.routes");
 const groupsRoutes = require("./groups.routes");
 const postsRoutes = require("./posts.routes");
 
-//MondoDB imports
-const Group = require("../models/group.model");
-const User = require("../models/user.model");
-const Post = require("../models/post.model");
-
-//Home routes
-router.get("/home", (req, res, next) => {
-  Group.find()
-    .sort({ likes: -1 })
-    .limit(3)
-    .then((events) => {
-      res.json(events);
-    })
-    .catch(console.log);
-});
-
-router.post("/addgroup", (req, res, next) => {
-  User.findById("628f088bc9086d416afbc97f")
-    .populate("groupsJoinedId")
-    .then((user) => {
-      user.groupsJoinedId.push(req.body.group);
-      user.save();
-      res.json(user);
-    });
-});
-
-router.post("/group/:group/comments", (req, res, next) => {
-  console.log(req.body)
-  Post.create(req.body)
-    .then((comment) => {
-      let typo = 0;
-      typo = comment._id;   
-
-      Group.findById(req.body.groupId)
-        .then((group) => {
-          group.posts.push(typo);
-          group.save();
-        })
-        .catch(console.log);
-
-      res.json("success");
-    })
-    .catch(console.log);
+//Our API landing page
+router.get("/", (req,res)=>{
+  res.json({message: "Welcome to the grassroots server"})
 });
 
 //Manages the routes to other pages
 router.use("/auth", authRoutes);
 
-router.use("/user", userRoutes);
+router.use("/user", usersRoutes);
 
 router.use("/issues", issuesRoutes);
 

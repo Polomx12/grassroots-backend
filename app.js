@@ -1,25 +1,22 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
+//This gives us access to our environment variables
 require("dotenv/config");
 
-// ℹ️ Connects to the database
+//This connects us to the MongoDB database
 require("./config/mongoAtlas.config");
 
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
+//Express handles our HTTP requests and initializas our application
 const express = require("express");
 
 const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
-require("./config/server")(app);
+//Imports our server configurations
+require("./config/server.config")(app);
 
-// 👇 Start handling routes here
-// Contrary to the views version, all routes are controlled from the routes/index.js
+//This handles all of our routes
 const allRoutes = require("./routes/index.routes");
 app.use("/api", allRoutes);
 
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
+//This will handle all of our errors
 require("./error-handling")(app);
 
 module.exports = app;
