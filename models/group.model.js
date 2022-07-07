@@ -4,13 +4,11 @@ const GroupSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
 
   administrators: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
 
   location: {
@@ -27,7 +25,7 @@ const GroupSchema = new Schema({
     },
 
     zipCode: {
-      type: String,
+      type: Number,
     },
   },
 
@@ -49,7 +47,8 @@ const GroupSchema = new Schema({
 
   groupImage: {
     type: String,
-    default:"https://res.cloudinary.com/polomx12/image/upload/v1653650858/Grassroots/860x394-1-5_atzspc.jpg"
+    default:
+      "https://res.cloudinary.com/polomx12/image/upload/v1653650858/Grassroots/860x394-1-5_atzspc.jpg",
   },
 
   webPage: {
