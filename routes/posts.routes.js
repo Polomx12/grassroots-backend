@@ -1,43 +1,67 @@
 //Imports
 const router = require("express").Router();
 
-//Import models
-const Post = require("../models/post.model");
-const Comment = require("../models/comment.model");
-const User = require("../models/user.model");
+//Import Models
+const Posts = require("../models/post.model");
 
-//Create Posts
-router.post("/create", (req, res, next) => {
-  Post.create(req.body)
+//Create a post
+router.post("/", (req, res) => {
+  Posts.create(req.body)
     .then((post) => {
       res.json(post);
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
-//Read Post
-router.get("/post/:postId", (req, res, next) => {
-  Post.findById(req.params.postId)
+//Read all posts
+router.get("/", (req, res) => {
+  Posts.find()
+    .then((posts) => {
+      res.json(posts);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
+});
+
+//Read a post
+router.get("/:postId", (req, res) => {
+  Posts.findById(req.params.postId)
     .then((post) => {
       res.json(post);
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
-//Update Post
-router.post("/post/:postId/edit", (req, res, next) => {
-  Post.findByIdAndUpdate(req.params.postId, req.body, { new: true })
+//Update a post
+router.patch("/:postId", (req, res) => {
+  Posts.findByIdAndUpdate(req.params.postId, req.body, { new: true })
     .then((post) => {
       res.json(post);
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
-//Delete events
-router.post("/post/:postId/delete", (req, res, next) => {
-  Post.findByIdAndDelete(req.params.postId)
-    .then(res.json("success"))
-    .catch(console.log);
+//Deletes a post
+router.delete("/:postId", (req, res) => {
+  Posts.findByIdAndDelete(req.params.postId)
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
 module.exports = router;

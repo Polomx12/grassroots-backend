@@ -35,8 +35,8 @@ router.get("/:issueId", (req, res) => {
       res.json(issue);
     })
     .catch((err) => {
-      res.json({ message: "Internal Server Error" });
       console.log(err);
+      res.json({ message: "Internal Server Error" });
     });
 });
 
@@ -47,8 +47,8 @@ router.patch("/:issueId", (req, res) => {
       res.json(issue);
     })
     .catch((err) => {
-      res.json({ message: "Internal Server Error" });
       console.log(err);
+      res.json({ message: "Internal Server Error" });
     });
 });
 
@@ -60,6 +60,7 @@ router.delete("/:issueId", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.json({ message: "Internal Server Error" });
     });
 });
 
