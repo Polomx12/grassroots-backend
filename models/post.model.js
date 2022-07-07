@@ -1,14 +1,14 @@
 const { Schema, model } = require("mongoose");
 
-const postSchema = new Schema(
+const PostSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
 
-    userName:{
-      type:String,
+    userName: {
+      type: String,
     },
 
     comments: [
@@ -34,7 +34,7 @@ const postSchema = new Schema(
 
     likes: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     pinned: {
@@ -47,4 +47,6 @@ const postSchema = new Schema(
   }
 );
 
-module.exports = model("Post", postSchema);
+const Post = model("Post", PostSchema)
+
+module.exports = Post;

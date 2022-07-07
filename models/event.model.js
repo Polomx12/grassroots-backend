@@ -4,14 +4,12 @@ const EventSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
 
   administrators: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
   ],
 
@@ -29,7 +27,7 @@ const EventSchema = new Schema({
     },
 
     zipCode: {
-      type: String,
+      type: Number,
     },
   },
 
@@ -65,7 +63,6 @@ const EventSchema = new Schema({
 
   eventName: {
     type: String,
-    required: true,
   },
 });
 

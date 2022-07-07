@@ -10,13 +10,13 @@ const IssueSchema = new Schema({
 
   issueName: {
     type: String,
-    required: [true, "Name is required"]
+    required: [true, "Name is required"],
   },
 
   shortDescription: {
     type: String,
-    required: [true, "A short Issue Description is required" ]
-    },
+    required: [true, "A short Issue Description is required"],
+  },
 
   issueDescription: {
     type: String,

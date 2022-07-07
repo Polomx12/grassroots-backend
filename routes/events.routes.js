@@ -1,67 +1,67 @@
 //Imports
 const router = require("express").Router();
-const fileUploader = require("../config/cloudinary.config");
 
-//Import models
-const User = require("../models/user.model");
-const Event = require("../models/event.model");
-const { compareSync } = require("bcrypt");
+//Import Models
+const Events = require("../models/event.model");
 
-//TODO: Change cloudinary config
-//Create Events
-router.post("/create", fileUploader.single("eventImage"), (req, res, next) => {
-  Event.create(req.body)
+//Create a post
+router.post("/", (req, res) => {
+  Events.create(req.body)
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
+});
+
+//Read all posts
+router.get("/", (req, res) => {
+  Events.find()
+    .then((events) => {
+      res.json(events);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Serer Error" });
+    });
+});
+
+//Read a post
+router.get("/:eventId", (req, res) => {
+  Events.findById(req.params.eventId)
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Erorr" });
+    });
+});
+
+//Update a post
+router.patch("/:eventId", (req, res) => {
+  Events.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
     .then((event) => {
       res.json(event);
     })
     .catch((err) => {
       console.log(err);
+      res.json({ message: "Internal Server Error" });
     });
 });
 
-router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
- 
-  if (!req.file) {
-    next(new Error("No file uploaded!"));
-    return;
-  }
-
-  res.json({ fileUrl: req.file.path });
-})
-//Read events
-router.get("/", (req, res, next) => {
-  Event.find()
-    .then((events) => {
-      res.json(events);
-    })
-    .catch(console.log);
-});
-
-router.get(
-  "/event/:eventId",
-  (req, res, next) => {
-    Event.findById(req.params.eventId)
-      .then((event) => {
-        res.json(event);
-      })
-      .catch(console.log);
-  }
-);
-
-//Update events
-router.post("/event/:eventId/edit", (req, res, next) => {
-  Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
+//Delete a post
+router.delete("/:eventId", (req, res) => {
+  Events.findByIdAndDelete(req.params.eventId)
     .then((event) => {
       res.json(event);
     })
-    .catch(console.log);
-});
-
-//Delete events
-router.post("/event/:eventId/delete", (req, res, next) => {
-  Event.findByIdAndDelete(req.params.eventId)
-    .then(res.json("success"))
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Internal Server Error" });
+    });
 });
 
 module.exports = router;
