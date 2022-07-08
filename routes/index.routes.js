@@ -8,6 +8,7 @@ const issuesRoutes = require("./issues.routes");
 const eventsRoutes = require("./events.routes");
 const groupsRoutes = require("./groups.routes");
 const postsRoutes = require("./posts.routes");
+const commentsRoutes = require("./comments.routes")
 
 //Our API landing page
 router.get("/", (req,res)=>{
@@ -26,6 +27,8 @@ router.use("/events", eventsRoutes);
 router.use("/groups", groupsRoutes);
 
 router.use("/posts", postsRoutes);
+
+router.use("/comments", commentsRoutes)
 
 //Export to App
 module.exports = router;
