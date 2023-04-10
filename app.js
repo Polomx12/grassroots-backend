@@ -4,7 +4,7 @@ require("dotenv/config");
 //This connects us to the MongoDB database
 require("./config/mongoAtlas.config");
 
-//Express handles our HTTP requests and initializas our application
+//Express handles our HTTP requests and initializes our application
 const express = require("express");
 
 const app = express();

@@ -36,7 +36,7 @@ router.get("/:eventId", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.json({ message: "Internal Server Erorr" });
+      res.json({ message: "Internal Server Error" });
     });
 });
 

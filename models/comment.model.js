@@ -1,5 +1,7 @@
+//Imports
 const { Schema, model } = require("mongoose");
 
+//Creating the schema
 const commentSchema = new Schema(
   {
     userId: {

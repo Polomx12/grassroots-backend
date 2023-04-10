@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
 
 //Read a comment
 router.get("/:commentId", (req, res) => {
-  Comments.findById(req.params.commentId)
+  Comments.findById(req.params["commentId"])
     .then((comment) => {
       res.json(comment);
     })
@@ -42,7 +42,7 @@ router.get("/:commentId", (req, res) => {
 
 //Update a comment
 router.patch("/:commentId", (req, res) => {
-  Comments.findByIdAndUpdate(req.params.commentId, req.body, { new: true })
+  Comments.findByIdAndUpdate(req.params["commentId"], req.body, { new: true })
     .then((comment) => {
       res.json(comment);
     })
@@ -53,7 +53,7 @@ router.patch("/:commentId", (req, res) => {
 });
 
 router.delete("/:commentId", (req, res) => {
-  Comments.findByIdAndDelete(req.params.commentId)
+  Comments.findByIdAndDelete(req.params["commentId"])
     .then((comment) => {
       res.json(comment);
     })
