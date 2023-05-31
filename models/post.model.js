@@ -7,10 +7,6 @@ const PostSchema = new Schema(
       ref: "User",
     },
 
-    userName: {
-      type: String,
-    },
-
     comments: [
       {
         type: Schema.Types.ObjectId,
@@ -35,11 +31,6 @@ const PostSchema = new Schema(
     likes: {
       type: Number,
       default: 0,
-    },
-
-    pinned: {
-      type: Boolean,
-      default: false,
     },
   },
   {

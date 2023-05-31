@@ -27,21 +27,9 @@ const userSchema = new Schema(
       type:String,
     },
 
-    twitter: {
-      type: String,
-    },
-
     gender: {
       type: String,
       enum: ["Male", "Female", "Prefer not to Answer", "Questioning", "Other"],
-    },
-
-    personalWebPage: {
-      type: String,
-    },
-
-    description: {
-      type: String,
     },
 
     //TODO: Add default Profile Pic
@@ -50,14 +38,7 @@ const userSchema = new Schema(
       default: "Default",
     },
 
-    issuesJoinedId: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Issue",
-      },
-    ],
-
-    eventsCreatedId: [
+    eventsJoinedId: [
       {
         type: Schema.Types.ObjectId,
         ref: "Event",

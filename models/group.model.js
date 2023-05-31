@@ -6,11 +6,6 @@ const GroupSchema = new Schema({
     ref: "User",
   },
 
-  administrators: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-
   location: {
     address: {
       type: String,
@@ -49,10 +44,6 @@ const GroupSchema = new Schema({
     type: String,
     default:
       "https://res.cloudinary.com/polomx12/image/upload/v1653650858/Grassroots/860x394-1-5_atzspc.jpg",
-  },
-
-  webPage: {
-    type: String,
   },
 
   groupMembers: [

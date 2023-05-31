@@ -6,13 +6,6 @@ const EventSchema = new Schema({
     ref: "User",
   },
 
-  administrators: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-
   location: {
     address: {
       type: String,
