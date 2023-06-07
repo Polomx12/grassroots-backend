@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     return Session.findById(req.headers.authorization).then((session) => {
       if (session) {
         return res.status(401).json({
-          errorMessage: "You should not be logged in to make this request",
+          errorMessage: "Must be logged out to make this request.",
         });
       }
       return next();

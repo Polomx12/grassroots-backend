@@ -34,10 +34,10 @@ router.get("/session", (req, res) => {
 router.post("/signup", isLoggedOut, (req, res) => {
     const {username, password} = req.body;
 
-    if (!username) {
+    if (!username || !password) {
         return res
             .status(400)
-            .json({errorMessage: "Please provide your username."});
+            .json({errorMessage: "Please provide a username and password."});
     }
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -45,7 +45,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
     if (!regex.test(password)) {
         return res.status(400).json({
             errorMessage:
-                "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
+                "Password must have at least 8 characters and contain at least one number, one lowercase and one uppercase letter.",
         });
     }
 
@@ -53,7 +53,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
     User.findOne({username}).then((found) => {
         // If the user is found, send the message username is taken
         if (found) {
-            return res.status(400).json({errorMessage: "Username already taken."});
+            return res.status(400).json({errorMessage: "Username is already taken."});
         }
 
         // if user is not found, create a new user - start with hashing the password
@@ -82,7 +82,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
                 if (error.code === 11000) {
                     return res.status(400).json({
                         errorMessage:
-                            "Username need to be unique. The username you chose is already in use.",
+                            "Username needs to be unique. The username you chose is already in use.",
                     });
                 }
                 return res.status(500).json({errorMessage: error.message});
