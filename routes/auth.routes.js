@@ -44,12 +44,12 @@ router.post("/signup", isLoggedOut, (req, res) => {
 
     if (!regex.test(password)) {
         return res.status(400).json({
-            errorMessage:
-                "Password must have at least 8 characters and contain at least one number, one lowercase and one uppercase letter.",
+            errorMessage: "Password must have at least 8 characters and contain at least one number, one lowercase and one uppercase letter.",
         });
     }
 
     // Search the database for a user with the username submitted in the form
+    // noinspection JSUnresolvedFunction
     User.findOne({username}).then((found) => {
         // If the user is found, send the message username is taken
         if (found) {
@@ -57,23 +57,18 @@ router.post("/signup", isLoggedOut, (req, res) => {
         }
 
         // if user is not found, create a new user - start with hashing the password
+        // noinspection JSUnresolvedFunction
         return bcrypt
             .genSalt(10)
             .then((salt) => bcrypt.hash(password, salt))
             .then((hashedPassword) => {
                 // Create a user and save it in the database
                 return User.create({
-                    username,
-                    password: hashedPassword,
+                    username, password: hashedPassword,
                 });
             })
             .then((user) => {
-                Session.create({
-                    user: user._id,
-                    createdAt: Date.now(),
-                }).then((session) => {
-                    res.status(201).json({user, accessToken: session["_id"]});
-                });
+                return res.status(200).json({message: `Account created for username: ${user.username}`});
             })
             .catch((error) => {
                 if (error instanceof mongoose["Error"].ValidationError) {
@@ -81,8 +76,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
                 }
                 if (error.code === 11000) {
                     return res.status(400).json({
-                        errorMessage:
-                            "Username needs to be unique. The username you chose is already in use.",
+                        errorMessage: "Username needs to be unique. The username you chose is already in use.",
                     });
                 }
                 return res.status(500).json({errorMessage: error.message});
@@ -113,11 +107,9 @@ router.post("/login", isLoggedOut, (req, res) => {
                     return res.status(400).json({errorMessage: "Wrong combination of username and password."});
                 }
 
-                Session.create({user: user._id, createdAt: Date.now()}).then(
-                    (session) => {
-                        return res.json({user, accessToken: session["_id"]});
-                    }
-                );
+                Session.create({user: user._id, createdAt: Date.now()}).then((session) => {
+                    return res.json({user, accessToken: session["_id"]});
+                });
             });
         })
 

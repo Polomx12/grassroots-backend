@@ -44,16 +44,6 @@ const EventSchema = new Schema({
     type: String,
   },
 
-  groupId: {
-    type: Schema.Types.ObjectId,
-    ref: "Group",
-  },
-
-  likes: {
-    type: Number,
-    default: 0,
-  },
-
   eventName: {
     type: String,
   },
