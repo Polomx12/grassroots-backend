@@ -23,12 +23,6 @@ const userSchema = new Schema(
             type: String,
         },
 
-        //TODO: Add default Profile Pic
-        profilePic: {
-            type: String,
-            default: "Default",
-        },
-
         eventsJoinedId: [
             {
                 type: Schema.Types.ObjectId,

@@ -1,52 +1,50 @@
-const { Schema, model } = require("mongoose");
+const {Schema, model} = require("mongoose");
 
 const EventSchema = new Schema({
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-
-  location: {
-    address: {
-      type: String,
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "User is required."]
     },
 
-    city: {
-      type: String,
+    location: {
+        address: {
+            type: String,
+            required: [true, "Address is required."],
+        },
+
+        city: {
+            type: String,
+            required: [true, "City is required."],
+        },
+
+        state: {
+            type: String,
+            required: [true, "State is required."],
+        },
+
+        zipCode: {
+            type: Number,
+            required: [true, "ZipCode is required."],
+        },
     },
 
-    state: {
-      type: String,
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Post",
+        },
+    ],
+
+    eventDescription: {
+        type: String,
+        required: [true, "Event Description is required."],
     },
 
-    zipCode: {
-      type: Number,
+    eventName: {
+        type: String,
+        required: [true, "Event Name is required."]
     },
-  },
-
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-    },
-  ],
-
-  issue: {
-    type: Schema.Types.ObjectId,
-    ref: "Issue",
-  },
-
-  eventDescription: {
-    type: String,
-  },
-
-  eventImage: {
-    type: String,
-  },
-
-  eventName: {
-    type: String,
-  },
 });
 
 const Event = model("Event", EventSchema);

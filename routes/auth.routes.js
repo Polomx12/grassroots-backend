@@ -34,11 +34,9 @@ router.get("/session", (req, res) => {
 router.post("/signup", isLoggedOut, (req, res) => {
     const {username, password} = req.body;
 
-    if (!username || !password) {
-        return res
-            .status(400)
-            .json({errorMessage: "Please provide a username and password."});
-    }
+    // Validation of username and password
+    if (typeof username != "string") return res.status(400).json({errorMessage: "Please provide a valid username and password."});
+    if (typeof password != 'string') return res.status(400).json({errorMessage: "Please provide a valid username and password."});
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
@@ -121,11 +119,11 @@ router.post("/login", isLoggedOut, (req, res) => {
 router.delete("/logout", isLoggedIn, (req, res) => {
     Session.findByIdAndDelete(req.headers.authorization)
         .then(() => {
-            res.status(200).json({message: "User was logged out"});
+            return res.status(200).json({message: "User was logged out"});
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({errorMessage: err.message});
+            return res.status(500).json({errorMessage: err.message});
         });
 });
 
