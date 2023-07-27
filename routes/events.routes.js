@@ -5,9 +5,11 @@ const {Types: {ObjectId}} = require('mongoose');
 
 //Import Models
 const Events = require("../models/event.model");
+const Posts = require("../models/post.model");
 
 //Import middleware
 const isLoggedIn = require("../middleware/isLoggedIn");
+const mongoose = require("mongoose");
 
 //Create an Event
 router.post("/", isLoggedIn, (req, res) => {
@@ -27,8 +29,9 @@ router.post("/", isLoggedIn, (req, res) => {
             return res.json(post);
         })
         .catch((err) => {
-            console.log(err);
-            return res.json({message: "Internal Server Error"});
+            if (err instanceof mongoose["Error"].ValidationError) {
+                return res.status(400).json({errorMessage: err.message});
+            }
         });
 });
 
@@ -45,7 +48,7 @@ router.get("/", (req, res) => {
 });
 
 //Read a single event
-router.get("/:eventId", (req, res) => {
+router.get("/:eventId", async (req, res) => {
     // Validate the event ID
     const isValidObjectId = (id) => ObjectId.isValid(id) && (new ObjectId(id)).toString() === id;
     if (!isValidObjectId(req.params.eventId)) {
@@ -53,18 +56,21 @@ router.get("/:eventId", (req, res) => {
     }
 
     // Retrieve the event.
-    Events.findById(req.params.eventId)
-        .then((post) => {
-            if (!post) {
-                return res.status(404).json({errorMessage: "Event doesn't exist."});
-            } else {
-                return res.json(post);
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            return res.json({message: "Internal Server Error"});
-        });
+    const eventInfo = await Events.findById(req.params.eventId).catch((err) => {
+        console.log(err);
+        return res.json({message: "Internal Server Error"});
+    });
+
+    // Returns error if Event doesn't exist
+    if (!eventInfo) return res.status(404).json({errorMessage: "Event doesn't exist"});
+
+    // Retrieves all posts from that event
+    const postInfo = await Posts.find({eventId: ObjectId(req.params.eventId)}).catch((err) => {
+        console.log(err);
+        return res.json({message: "Internal Server Error"});
+    });
+
+    return res.json({eventInfo, postInfo});
 });
 
 //Update an event
@@ -98,6 +104,11 @@ router.patch("/:eventId", isLoggedIn, async (req, res) => {
     Events.findByIdAndUpdate(req.params.eventId, req.body, {new: true})
         .then((event) => {
             return res.json(event);
+        })
+        .catch((err) => {
+            if (err instanceof mongoose["Error"].ValidationError) {
+                return res.status(400).json({errorMessage: err.message});
+            }
         });
 });
 
