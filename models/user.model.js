@@ -6,11 +6,13 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Username is required."],
             unique: true,
+            maxLength: 50
         },
 
         password: {
             type: String,
             required: [true, "Password is required."],
+            maxLength: 50
         },
 
         roles: {
@@ -21,6 +23,7 @@ const userSchema = new Schema(
 
         userDescription: {
             type: String,
+            maxLength: 700
         },
 
         eventsJoinedId: [

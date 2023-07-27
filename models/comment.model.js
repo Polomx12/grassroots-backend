@@ -1,31 +1,28 @@
 //Imports
-const { Schema, model } = require("mongoose");
+const {Schema, model} = require("mongoose");
 
 //Creating the schema
 const commentSchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+    {
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+
+        postId: {
+            type: Schema.Types.ObjectId,
+            ref: "Post",
+        },
+
+        commentText: {
+            type: String,
+            maxLength: 400
+        },
     },
 
-    postId: {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-    },
-
-    likes: {
-      type: Number,
-    },
-
-    commentText: {
-      type: String,
-    },
-  },
-
-  {
-    timestamps: true,
-  }
+    {
+        timestamps: true,
+    }
 );
 
 const Comment = model("Comment", commentSchema);

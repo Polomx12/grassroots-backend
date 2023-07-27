@@ -6,68 +6,16 @@ const GroupSchema = new Schema({
     ref: "User",
   },
 
-  location: {
-    address: {
-      type: String,
-    },
-
-    city: {
-      type: String,
-    },
-
-    state: {
-      type: String,
-    },
-
-    zipCode: {
-      type: Number,
-    },
-  },
-
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-    },
-  ],
-
-  issue: {
-    type: Schema.Types.ObjectId,
-    ref: "Issue",
-  },
-
   groupDescription: {
     type: String,
+    required: [true, 'Group description is required.'],
+    maxLength: 100
   },
-
-  groupImage: {
-    type: String,
-    default:
-      "https://res.cloudinary.com/polomx12/image/upload/v1653650858/Grassroots/860x394-1-5_atzspc.jpg",
-  },
-
-  groupMembers: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-
-  likes: {
-    type: Number,
-    default: 0,
-  },
-
-  groupEvents: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Event",
-    },
-  ],
 
   groupName: {
     type: String,
     required: [true, "Group Name is required"],
+    maxLength: 50
   },
 });
 
