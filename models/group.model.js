@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const GroupSchema = new Schema({
-  owner: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },

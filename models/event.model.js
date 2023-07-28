@@ -1,7 +1,7 @@
 const {Schema, model} = require("mongoose");
 
 const EventSchema = new Schema({
-    owner: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: [true, "User is required."]
