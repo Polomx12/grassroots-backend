@@ -37,13 +37,13 @@ const EventSchema = new Schema({
     eventDescription: {
         type: String,
         required: [true, "Event description is required."],
-        maxLength: 100
+        maxLength: 300
     },
 
     eventName: {
         type: String,
         required: [true, "Event name is required."],
-        maxLength: 50
+        maxLength: 100
     },
 });
 

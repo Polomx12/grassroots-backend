@@ -11,8 +11,7 @@ const userSchema = new Schema(
 
         password: {
             type: String,
-            required: [true, "Password is required."],
-            maxLength: 50
+            required: [true, "Password is required."]
         },
 
         roles: {

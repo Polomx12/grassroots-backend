@@ -4,18 +4,19 @@ const GroupSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: [true, 'User is required.']
   },
 
   groupDescription: {
     type: String,
     required: [true, 'Group description is required.'],
-    maxLength: 100
+      maxLength: 300
   },
 
   groupName: {
     type: String,
     required: [true, "Group Name is required"],
-    maxLength: 50
+      maxLength: 100
   },
 });
 
