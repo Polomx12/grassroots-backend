@@ -61,7 +61,7 @@ router.get("/:groupId", async (req, res) => {
     if (!groupInfo) return res.status(404).json({errorMessage: "Group doesn't exist"});
 
     // Retrieves all posts from that event
-    const postInfo = await Posts.find({groupId: ObjectId(req.params.groupId)})
+    const postInfo = await Posts.find({externalId: req.params.groupId})
         .catch((err) => {
             return res.status(400).json({errorMessage: err.message});
         });
@@ -110,12 +110,16 @@ router.delete("/:groupId", isLoggedIn, async (req, res) => {
     if (!isValidObjectId(req.params.groupId)) return res.status(404).json({errorMessage: "Group ID is incorrect"});
 
     // Retrieve group
-    const group = await Groups.findById(req.params.groupId).populate({path: 'user', model: 'User'});
+    const group = await Groups.findById(req.params.groupId).populate({path: 'user', model: 'User'})
+        .catch((err) => {
+            return res.status(400).json({errorMessage: err.message});
+        });
 
     // Validate that the group exists and the user is the owner.
     if (!group) return res.status(404).json({errorMessage: "Group doesn't exist"});
     if (group['user'].username !== req.user.username) return res.status(401).json({errorMessage: 'Not Authorized'});
 
+    // Delete Group
     Groups.findByIdAndDelete(req.params.groupId)
         .then((group) => {
             return res.json(group);
