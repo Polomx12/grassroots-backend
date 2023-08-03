@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 //Manages the routes to other pages
 router.use("/auth", authRoutes);
 
-router.use("/user", usersRoutes);
+router.use("/users", usersRoutes);
 
 router.use("/events", eventsRoutes);
 
