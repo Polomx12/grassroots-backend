@@ -66,7 +66,7 @@ router.get("/:eventId", async (req, res) => {
     if (!eventInfo) return res.status(404).json({errorMessage: "Event doesn't exist"});
 
     // Retrieves all posts from that event
-    const postInfo = await Posts.find({eventId: ObjectId(req.params.eventId)})
+    const postInfo = await Posts.find({externalId: req.params.eventId})
         .catch((err) => {
             return res.status(400).json({errorMessage: err.message});
         });
@@ -114,18 +114,22 @@ router.patch("/:eventId", isLoggedIn, async (req, res) => {
         });
 });
 
-// Delete a post
+// Delete an event
 router.delete("/:eventId", isLoggedIn, async (req, res) => {
     // Validate the event ID
     if (!isValidObjectId(req.params.eventId)) return res.status(404).json({errorMessage: "Event ID is incorrect."});
 
     // Retrieve event
-    const event = await Events.findById(req.params.eventId).populate({path: "user", model: 'User'});
+    const event = await Events.findById(req.params.eventId).populate({path: "user", model: 'User'})
+        .catch((err) => {
+            return res.status(400).json({errorMessage: err.message});
+        });
 
     // Validate that the event exists and the user is the owner.
     if (!event) return res.status(404).json({errorMessage: "Event doesn't exist"});
     if (event['user'].username !== req.user.username) return res.status(401).json({errorMessage: "Not Authorized."});
 
+    // Delete Event
     Events.findByIdAndDelete(req.params.eventId)
         .then((event) => {
             return res.json(event);
