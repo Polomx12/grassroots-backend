@@ -127,7 +127,7 @@ router.delete("/:postId", isLoggedIn, async (req, res) => {
             return res.json(post);
         })
         .catch((err) => {
-            return res.status(400).json({errorMessage: err.me});
+            return res.status(400).json({errorMessage: err.message});
         });
 });
 
