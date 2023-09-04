@@ -6,7 +6,7 @@ require("cookie-parser");
 
 // Middleware configuration
 module.exports = (app) => {
-  // This will allow us to receive requests to be forwarded to our server by the proxy.
+  // This will allow us to receive requests to be forwarded to our server by the proxy
   app.set("trust proxy", 1);
 
   // Allows cors configuration
@@ -24,7 +24,7 @@ module.exports = (app) => {
   next();
 });
 
-  // During development this will log all of our requests.
+  // During development this will log all of our requests
   app.use(logger("dev"));
 
   // To have access to `body` property in the request
