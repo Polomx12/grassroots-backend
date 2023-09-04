@@ -1,4 +1,4 @@
-// Server import
+// Server imports
 const router = require("express").Router();
 
 // Package Imports
