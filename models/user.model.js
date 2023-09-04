@@ -14,30 +14,25 @@ const userSchema = new Schema(
             required: [true, "Password is required."]
         },
 
-        roles: {
-            type: String,
-            enum: ["User", "Administrator", "SuperAdministrator"],
-            default: "User",
-        },
-
         userDescription: {
             type: String,
             maxLength: 700
         },
 
-        eventsJoinedId: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Event",
-            },
-        ],
+        email:{
+            type: String,
+            maxLength: 50
+        },
 
-        groupsJoinedId: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Group",
-            },
-        ],
+        website: {
+            type: String,
+            maxLength: 300
+        },
+
+        userImage:{
+            type: String,
+            maxLength: 200
+        }
     },
 
     {
