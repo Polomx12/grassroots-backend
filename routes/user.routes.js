@@ -1,7 +1,6 @@
 // Imports
 const router = require("express").Router();
 const {Types: {ObjectId}} =  require("mongoose");
-const parser = require('../config/cloudinary.config');
 const cloudinary = require("../config/cloudinary.config");
 const imageParser = require('../middleware/imageParser');
 
