@@ -11,7 +11,7 @@
 <!--suppress ALL -->
 <br />
 <div align="center">
-  <a href="https://github.com/leopoldonavarretem/grassroots">
+  <a href="https://github.com/leopoldonavarretem/grassroots-backend">
     <img src="./public/images/logo.svg" alt="Logo" width="200" height="200">
   </a>
 
@@ -20,7 +20,7 @@
   <p align="center">
     Grassroots is a personal project I'm currently working on as part of my web development bootcamp. This wepage works as social media for people to organize around the political, economic or social issues that they care about.
     <br />
-    <a href="https://github.com/leopoldonavarretem/grassroots"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/leopoldonavarretem/grassroots-backend"><strong>Explore the docs »</strong></a>
     <br />
 </p>
 </div>
@@ -76,7 +76,7 @@ them. Users are able to create and edit their own pages.
 
 ### Prerequisites
 
-* Node package manager
+* Node Package Manager
 * A Mongo DB account
 * A Cloudinary account
 
@@ -84,7 +84,7 @@ them. Users are able to create and edit their own pages.
 
 1. Clone the repo
    ```
-   git clone https://github.com/leopoldonavarretem/grassroots.git
+   git clone https://github.com/leopoldonavarretem/grassroots-backend.git
    ```
 2. Install NPM packages
    ```
@@ -110,7 +110,7 @@ them. Users are able to create and edit their own pages.
 
 ## Contact
 
-Project Link: [https://github.com/leopoldonavarretem/grassroots](https://github.com/leopoldonavarretem/grassroots)
+Project Link: [https://github.com/leopoldonavarretem/grassroots-backend](https://github.com/leopoldonavarretem/grassroots-backend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,13 +130,13 @@ Project Link: [https://github.com/leopoldonavarretem/grassroots](https://github.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/leopoldonavarretem/ders-backend.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/leopoldonavarretem/grassroots-backend.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/leopoldonavarretem/ders-backend/graphs/contributors
+[contributors-url]: https://github.com/leopoldonavarretem/grassroots-backend/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/leopoldonavarretem/ders-backend.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/leopoldonavarretem/grassroots-backend.svg?style=for-the-badge
 
-[forks-url]: https://github.com/leopoldonavarretem/ders-backend/network/members
+[forks-url]: https://github.com/leopoldonavarretem/grassroots-backend/network/members
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
